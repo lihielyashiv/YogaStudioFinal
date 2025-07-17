@@ -3,160 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Content Security Policy to allow Tableau iframes and scripts -->
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://public.tableau.com; frame-src https://public.tableau.com; connect-src https://public.tableau.com; img-src https://public.tableau.com data:">
-    <title>Yoga Studio Analytics 🧘‍♀️</title>
+    <title>📊 Yoga Studio Data Insights 🧘‍♀️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* General Styling */
+        /* General Styles */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #f0f8ff, #e6e6fa); /* Light gradient background */
             color: #333;
             line-height: 1.6;
         }
 
-        /* Header Styling */
+        /* Header */
         header {
-            background: linear-gradient(90deg, #ff6f61, #ffb88c);
-            padding: 2rem;
+            background: linear-gradient(45deg, #6a11cb, #2575fc); /* Vibrant header gradient */
+            color: white;
+            padding: 1.5rem 0;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeInDown 1s ease-out;
         }
 
         header h1 {
-            font-size: 2.5rem;
             margin: 0;
-            color: white;
-            text-transform: uppercase;
+            font-size: 3em;
             letter-spacing: 2px;
+            animation: textPop 1.5s ease-out;
         }
 
         header p {
-            font-size: 1.2rem;
-            color: #fff;
-            margin: 0.5rem 0;
+            font-size: 1.2em;
+            margin-top: 10px;
         }
 
-        /* Navigation Styling */
+        /* Navigation */
         nav {
-            background: #333;
-            padding: 1rem;
+            background-color: #f8f8f8;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 1.5rem;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-        nav a:hover {
-            color: #ffb88c;
+        nav ul li {
+            display: inline-block;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #4a4a4a;
+            font-weight: 600;
+            font-size: 1.1em;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #d1c4e9;
+            color: #6a11cb;
+            transform: translateY(-3px);
         }
 
         /* Main Content */
         .container {
             max-width: 1200px;
             margin: 2rem auto;
-            padding: 0 1rem;
+            padding: 0 20px;
         }
 
         .section {
-            background: white;
+            background-color: #ffffff;
             border-radius: 10px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1s ease-in-out;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2.5rem;
+            padding: 2.5rem;
+            animation: fadeInUp 1s ease-out;
+            position: relative; /* For the emoji */
         }
 
         .section h2 {
-            color: #ff6f61;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
+            color: #6a11cb;
+            font-size: 2.2em;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #e0b0ff;
+            padding-bottom: 10px;
             display: flex;
             align-items: center;
         }
 
-        .section h2::before {
-            content: '🧘‍♀️';
-            margin-right: 0.5rem;
+        .section h2 span.emoji {
+            margin-right: 15px;
+            font-size: 1.2em;
+            animation: bounce 1s infinite alternate;
         }
 
-        /* Tableau Embed Styling */
-        .tableau-embed {
+        .section p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Tableau Embed Styles */
+        .tableau-container {
+            width: 100%;
+            height: 700px; /* Adjust height as needed */
+            margin-top: 2rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden; /* Ensures the iframe fits within the rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: all 0.5s ease-in-out;
+        }
+
+        .tableau-container:hover {
+            transform: scale(1.01);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .tableauPlaceholder {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Call to Action/Contact */
+        .cta-section {
             text-align: center;
-            margin: 2rem 0;
-            min-height: 600px;
+            padding: 3rem 0;
+            background: linear-gradient(90deg, #a1c4fd, #c2e9fb); /* Light blue gradient */
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 3rem;
+            animation: fadeIn 1.5s ease-out;
         }
 
-        .tableau-embed h3 {
-            color: #333;
-            font-size: 1.5rem;
+        .cta-section h3 {
+            color: #2575fc;
+            font-size: 2em;
             margin-bottom: 1rem;
         }
 
-        .tableau-embed iframe {
-            width: 100%;
-            height: 600px;
-            border: none;
-            background: #f9f9f9;
+        .cta-section p {
+            font-size: 1.1em;
+            color: #4a4a4a;
+            margin-bottom: 2rem;
         }
 
-        /* Error Message Styling */
-        .error-message {
-            color: #ff4444;
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #2575fc, #6a11cb); /* Reverse gradient on hover */
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
             text-align: center;
-            margin: 1rem 0;
-        }
-
-        .error-message a {
-            color: #ff6f61;
-            text-decoration: underline;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+            font-size: 0.9em;
+            animation: fadeInUp 1s ease-out;
         }
 
         /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes textPop {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            70% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Footer Styling */
-        footer {
-            background: linear-gradient(90deg, #ff6f61, #ffb88c);
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 1rem;
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             header h1 {
-                font-size: 1.8rem;
+                font-size: 2.5em;
             }
 
-            nav a {
+            nav ul li {
                 display: block;
-                margin: 0.5rem 0;
+                margin: 10px 0;
             }
 
-            .container {
-                padding: 0 1rem;
+            .section {
+                padding: 1.5rem;
             }
 
-            .tableau-embed iframe {
+            .section h2 {
+                font-size: 1.8em;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section h2 span.emoji {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .tableau-container {
+                height: 500px; /* Adjust height for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .section {
+                padding: 1rem;
+            }
+
+            .section h2 {
+                font-size: 1.5em;
+            }
+
+            .tableau-container {
                 height: 400px;
             }
         }
@@ -164,95 +291,169 @@
 </head>
 <body>
     <header>
-        <h1>Yoga Studio Analytics Dashboard 🧘‍♀️✨</h1>
-        <p>Explore the power of data in enhancing your yoga journey 🌿</p>
+        <h1>📊 Yoga Studio Data Insights 🧘‍♀️✨</h1>
+        <p>Unlocking the Power of Yoga Data for Smarter Decisions! 🚀</p>
     </header>
 
     <nav>
-        <a href="#overview">Overview</a>
-        <a href="#financial">Financial Data</a>
-        <a href="#attendance">Attendance Stats</a>
-        <a href="#distribution">Dist. Channels & Revenue</a>
+        <ul>
+            <li><a href="#overview">Home 🏡</a></li>
+            <li><a href="#financial">Financial Data 💰</a></li>
+            <li><a href="#attendance">Attendance Stats 📈</a></li>
+            <li><a href="#distribution">Distribution & Revenue 🎯</a></li>
+            <li><a href="#contact">Get in Touch 📞</a></li>
+        </ul>
     </nav>
 
-    <div class="container">
-        <div class="section" id="overview">
-            <h2>Welcome to Our Yoga Analytics 🌸</h2>
-            <p>
-                Dive into the data-driven world of our yoga studio! These dashboards, powered by Tableau, provide insights into financial performance, class attendance, and distribution channels to help us create a more zen experience for everyone. 🧘‍♂️
-            </p>
-        </div>
+    <main class="container">
+        <section id="overview" class="section">
+            <h2><span class="emoji">👋</span> Welcome to Your Data Hub!</h2>
+            <p>Dive deep into the performance of your Yoga Studio with our interactive data analytics dashboards. We transform raw data into actionable insights, helping you make informed decisions and grow your business. Let's explore the numbers together! 🌟</p>
+            <p>From financial health to class popularity and revenue streams, everything you need to know is right here, beautifully visualized. Get ready to gain a crystal-clear understanding of your studio's pulse! ❤️</p>
+        </section>
 
-        <div class="section tableau-embed" id="financial">
-            <h3>Studio Financial Data 📊</h3>
-            <iframe src="https://public.tableau.com/views/YogaStudio/StudiosFinancialData?:embed=y&:showVizHome=no&:display_count=n&:origin=viz_share_link" width="100%" height="600px" frameborder="0"></iframe>
-            <p class="error-message">
-                If the Financial Data dashboard is not visible, please <a href="https://public.tableau.com/views/YogaStudio/StudiosFinancialData" target="_blank">view it directly on Tableau Public</a>. 😔
-            </p>
-        </div>
+        <section id="financial" class="section">
+            <h2><span class="emoji">💸</span> Financial Data: Understanding Your Studio's Health</h2>
+            <p>Unlock the secrets of your studio's financial performance. This dashboard provides a comprehensive overview of revenues, expenses, and profitability, helping you identify trends and opportunities for growth. Keep your finances in tip-top shape! 💰📊</p>
+            <div class="tableau-container">
+                <div class='tableauPlaceholder' id='viz1700000000000'>
+                    <noscript><a href='#'><img alt='StudiosFinancialData ' src='https://public.tableau.com/static/images/Yo/YogaStudio/StudiosFinancialData/1_thumbnail.png' style='border: none' /></a></noscript>
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                        <param name='embed_code_version' value='3' />
+                        <param name='site_root' value='' />
+                        <param name='name' value='YogaStudio/StudiosFinancialData' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='language' value='en-US' />
+                        <param name='display_count' value='n' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/Yo/YogaStudio/StudiosFinancialData/1.png' />
+                        <param name='original_host_url' value='https://public.tableau.com' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_command_bar' value='yes' />
+                        <param name='from_url' value='no' />
+                        <param name='ticket' value='<TICKET_PLACEHOLDER>' />
+                    </object>
+                </div>
+            </div>
+            <p><strong>Pro Tip:</strong> Hover over different sections of the dashboard to reveal detailed information and drill down into specific metrics! 🔍</p>
+        </section>
 
-        <div class="section tableau-embed" id="attendance">
-            <h3>Classes Attendance Statistics 📈</h3>
-            <iframe src="https://public.tableau.com/views/YogaStudio-ClassessAttendenceStatistics/ClassessAttendenceStatistics?:embed=y&:showVizHome=no&:display_count=n&:origin=viz_share_link" width="100%" height="600px" frameborder="0"></iframe>
-            <p class="error-message">
-                If the Attendance Statistics dashboard is not visible, please <a href="https://public.tableau.com/views/YogaStudio-ClassessAttendenceStatistics/ClassessAttendenceStatistics" target="_blank">view it directly on Tableau Public</a>. 😔
-            </p>
-        </div>
+        <section id="attendance" class="section">
+            <h2><span class="emoji"> attendance</span> Classes' Attendance Statistics: Know Your Audience</h2>
+            <p>Ever wondered which classes are booming and which need a little boost? This dashboard provides insightful attendance statistics, helping you understand popular classes, peak times, and student engagement. Optimize your schedule and keep those studios full! 🧑‍🤝‍🧑📊</p>
+            <div class="tableau-container">
+                <div class='tableauPlaceholder' id='viz1700000000001'>
+                    <noscript><a href='#'><img alt='ClassessAttendenceStatistics ' src='https://public.tableau.com/static/images/Yo/YogaStudio-ClassessAttendenceStatistics/ClassessAttendenceStatistics/1_thumbnail.png' style='border: none' /></a></noscript>
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                        <param name='embed_code_version' value='3' />
+                        <param name='site_root' value='' />
+                        <param name='name' value='YogaStudio-ClassessAttendenceStatistics/ClassessAttendenceStatistics' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='language' value='en-US' />
+                        <param name='display_count' value='n' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/Yo/YogaStudio-ClassessAttendenceStatistics/ClassessAttendenceStatistics/1.png' />
+                        <param name='original_host_url' value='https://public.tableau.com' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_command_bar' value='yes' />
+                        <param name='from_url' value='no' />
+                        <param name='ticket' value='<TICKET_PLACEHOLDER>' />
+                    </object>
+                </div>
+            </div>
+            <p><strong>Key Insight:</strong> Use the filters on the dashboard to segment attendance by class type, instructor, or time of day! 🗓️👩‍🏫</p>
+        </section>
 
-        <div class="section tableau-embed" id="distribution">
-            <h3>Distribution Channels & Revenue 💰</h3>
-            <iframe src="https://public.tableau.com/views/YogaStudio-Dist_channelsRevenue/Dist_channelsRevenue?:embed=y&:showVizHome=no&:display_count=n&:origin=viz_share_link" width="100%" height="600px" frameborder="0"></iframe>
-            <p class="error-message">
-                If the Distribution Channels dashboard is not visible, please <a href="https://public.tableau.com/views/YogaStudio-Dist_channelsRevenue/Dist_channelsRevenue" target="_blank">view it directly on Tableau Public</a>. 😔
-            </p>
-        </div>
-    </div>
+        <section id="distribution" class="section">
+            <h2><span class="emoji">🎯</span> Distribution Channels & Revenue: Where Are You Shining?</h2>
+            <p>Discover which of your distribution channels are driving the most revenue. This dashboard helps you understand the effectiveness of your marketing efforts and identify the most profitable avenues for customer acquisition. Optimize your outreach strategies! 🚀💰</p>
+            <div class="tableau-container">
+                <div class='tableauPlaceholder' id='viz1700000000002'>
+                    <noscript><a href='#'><img alt='Dist_channelsRevenue ' src='https://public.tableau.com/static/images/Yo/YogaStudio-Dist_channelsRevenue/Dist_channelsRevenue/1_thumbnail.png' style='border: none' /></a></noscript>
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                        <param name='embed_code_version' value='3' />
+                        <param name='site_root' value='' />
+                        <param name='name' value='YogaStudio-Dist_channelsRevenue/Dist_channelsRevenue' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='language' value='en-US' />
+                        <param name='display_count' value='n' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/Yo/YogaStudio-Dist_channelsRevenue/Dist_channelsRevenue/1.png' />
+                        <param name='original_host_url' value='https://public.tableau.com' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_command_bar' value='yes' />
+                        <param name='from_url' value='no' />
+                        <param name='ticket' value='<TICKET_PLACEHOLDER>' />
+                    </object>
+                </div>
+            </div>
+            <p><strong>Actionable Insight:</strong> Use this data to strategically allocate your marketing budget and focus on the channels that yield the best return on investment! 💡💸</p>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <h3>Ready for More Insights? 🚀</h3>
+            <p>If you have any questions about these dashboards or need custom data analysis for your Yoga Studio, don't hesitate to reach out! We're here to help you shine. ✨</p>
+            <a href="mailto:info@yogastudioanalytics.com" class="cta-button">Contact Us Today! 📧</a>
+        </section>
+    </main>
 
     <footer>
-        <p>© 2025 Yoga Studio Analytics | Powered by Passion & Data 🌿</p>
+        <p>&copy; 2025 Yoga Studio Data Insights. All rights reserved. Made with ❤️ and Data. 📈</p>
     </footer>
 
-    <script>
-        // Smooth Scroll for Navigation
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+    <script type='text/javascript'>
+        // Function to initialize Tableau visualizations
+        function initViz(containerId, vizUrl) {
+            var containerDiv = document.getElementById(containerId);
+            var options = {
+                hideTabs: true,
+                hideToolbar: true,
+                allowInteractions: true // Allow user interaction
+            };
+            var viz = new tableau.Viz(containerDiv, vizUrl, options);
+        }
+
+        // Load Tableau JS API (if not already loaded by Tableau's embed code)
+        // This ensures the tableau.Viz object is available
+        function loadTableauScript() {
+            var script = document.createElement('script');
+            script.src = 'https://public.tableau.com/javascripts/api/tableau-2.min.js';
+            script.onload = function() {
+                // Initialize visualizations after the Tableau API script has loaded
+                initViz('viz1700000000000', 'https://public.tableau.com/views/YogaStudio/StudiosFinancialData?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link');
+                initViz('viz1700000000001', 'https://public.tableau.com/views/YogaStudio-ClassessAttendenceStatistics/ClassessAttendenceStatistics?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link');
+                initViz('viz1700000000002', 'https://public.tableau.com/views/YogaStudio-Dist_channelsRevenue/Dist_channelsRevenue?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link');
+            };
+            document.head.appendChild(script);
+        }
+
+        // Check if tableau object exists before loading script to avoid multiple loads
+        if (typeof tableau === 'undefined') {
+            loadTableauScript();
+        } else {
+            // If tableau object already exists, just initialize visualizations
+            initViz('viz1700000000000', 'https://public.tableau.com/views/YogaStudio/StudiosFinancialData?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link');
+            initViz('viz1700000000001', 'https://public.tableau.com/views/YogaStudio-ClassessAttendenceStatistics/ClassessAttendenceStatistics?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link');
+            initViz('viz1700000000002', 'https://public.tableau.com/views/YogaStudio-Dist_channelsRevenue/Dist_channelsRevenue?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav ul li a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const sectionId = this.getAttribute('href').substring(1);
-                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-            });
-        });
 
-        // Add animation to sections on scroll
-        const sections = document.querySelectorAll('.section');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeIn 1s ease-in-out';
-                }
-            });
-        }, { threshold: 0.1 });
-
-        sections.forEach(section => observer.observe(section));
-
-        // Check if iframes loaded successfully
-        document.querySelectorAll('.tableau-embed iframe').forEach(iframe => {
-            iframe.addEventListener('load', () => {
-                console.log(`Iframe loaded: ${iframe.src}`);
-                // Check if iframe content is empty
-                try {
-                    const content = iframe.contentDocument || iframe.contentWindow.document;
-                    if (!content.body || content.body.innerHTML.trim() === '') {
-                        console.warn(`Iframe content is empty for: ${iframe.src}`);
-                        iframe.nextElementSibling.style.display = 'block';
-                    }
-                } catch (e) {
-                    console.error(`Error accessing iframe content for ${iframe.src}:`, e);
-                    iframe.nextElementSibling.style.display = 'block';
-                }
-            });
-            iframe.addEventListener('error', () => {
-                console.error(`Iframe failed to load: ${iframe.src}`);
-                iframe.nextElementSibling.style.display = 'block';
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
     </script>
