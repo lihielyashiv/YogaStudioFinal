@@ -334,8 +334,7 @@
                         <param name='display_overlay' value='yes' />
                         <param name='display_command_bar' value='yes' />
                         <param name='from_url' value='no' />
-                        <param name='ticket' value='<TICKET_PLACEHOLDER>' />
-                    </object>
+                        </object>
                 </div>
             </div>
             <p><strong>Pro Tip:</strong> Hover over different sections of the dashboard to reveal detailed information and drill down into specific metrics! 🔍</p>
@@ -363,8 +362,7 @@
                         <param name='display_overlay' value='yes' />
                         <param name='display_command_bar' value='yes' />
                         <param name='from_url' value='no' />
-                        <param name='ticket' value='<TICKET_PLACEHOLDER>' />
-                    </object>
+                        </object>
                 </div>
             </div>
             <p><strong>Key Insight:</strong> Use the filters on the dashboard to segment attendance by class type, instructor, or time of day! 🗓️👩‍🏫</p>
@@ -392,8 +390,7 @@
                         <param name='display_overlay' value='yes' />
                         <param name='display_command_bar' value='yes' />
                         <param name='from_url' value='no' />
-                        <param name='ticket' value='<TICKET_PLACEHOLDER>' />
-                    </object>
+                        </object>
                 </div>
             </div>
             <p><strong>Actionable Insight:</strong> Use this data to strategically allocate your marketing budget and focus on the channels that yield the best return on investment! 💡💸</p>
@@ -419,19 +416,26 @@
                 hideToolbar: true,
                 allowInteractions: true // Allow user interaction
             };
-            var viz = new tableau.Viz(containerDiv, vizUrl, options);
+            // Ensure containerDiv exists before initializing Viz
+            if (containerDiv) {
+                new tableau.Viz(containerDiv, vizUrl, options);
+            } else {
+                console.error("Tableau container div not found:", containerId);
+            }
         }
 
         // Load Tableau JS API (if not already loaded by Tableau's embed code)
-        // This ensures the tableau.Viz object is available
         function loadTableauScript() {
             var script = document.createElement('script');
             script.src = 'https://public.tableau.com/javascripts/api/tableau-2.min.js';
             script.onload = function() {
                 // Initialize visualizations after the Tableau API script has loaded
-                initViz('viz1700000000000', 'https://public.tableau.com/views/YogaStudio/StudiosFinancialData?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link');
-                initViz('viz1700000000001', 'https://public.tableau.com/views/YogaStudio-ClassessAttendenceStatistics/ClassessAttendenceStatistics?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link');
-                initViz('viz1700000000002', 'https://public.tableau.com/views/YogaStudio-Dist_channelsRevenue/Dist_channelsRevenue?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link');
+                initViz('viz1700000000000', 'https://public.tableau.com/views/YogaStudio/StudiosFinancialData');
+                initViz('viz1700000000001', 'https://public.tableau.com/views/YogaStudio-ClassessAttendenceStatistics/ClassessAttendenceStatistics');
+                initViz('viz1700000000002', 'https://public.tableau.com/views/YogaStudio-Dist_channelsRevenue/Dist_channelsRevenue');
+            };
+            script.onerror = function() {
+                console.error("Failed to load Tableau JavaScript API.");
             };
             document.head.appendChild(script);
         }
@@ -441,9 +445,9 @@
             loadTableauScript();
         } else {
             // If tableau object already exists, just initialize visualizations
-            initViz('viz1700000000000', 'https://public.tableau.com/views/YogaStudio/StudiosFinancialData?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link');
-            initViz('viz1700000000001', 'https://public.tableau.com/views/YogaStudio-ClassessAttendenceStatistics/ClassessAttendenceStatistics?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link');
-            initViz('viz1700000000002', 'https://public.tableau.com/views/YogaStudio-Dist_channelsRevenue/Dist_channelsRevenue?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link');
+            initViz('viz1700000000000', 'https://public.tableau.com/views/YogaStudio/StudiosFinancialData');
+            initViz('viz1700000000001', 'https://public.tableau.com/views/YogaStudio-ClassessAttendenceStatistics/ClassessAttendenceStatistics');
+            initViz('viz1700000000002', 'https://public.tableau.com/views/YogaStudio-Dist_channelsRevenue/Dist_channelsRevenue');
         }
 
         // Smooth scrolling for navigation links
