@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Content Security Policy to allow Tableau scripts and iframes -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://public.tableau.com; frame-src https://public.tableau.com; connect-src https://public.tableau.com">
+    <title>Yoga Studio Analytics 🧘‍♀️</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styling */
+        header {
+            background: linear-gradient(90deg, #ff6f61, #ffb88c);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #fff;
+            margin: 0.5rem 0;
+        }
+
+        /* Navigation Styling */
+        nav {
+            background: #333;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffb88c;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .section h2 {
+            color: #ff6f61;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h2::before {
+            content: '🧘‍♀️';
+            margin-right: 0.5rem;
+        }
+
+        /* Tableau Embed Styling */
+        .tableau-embed {
+            text-align: center;
+            margin: 2rem 0;
+            min-height: 600px; /* Ensure space for dashboards */
+        }
+
+        .tableau-embed h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tableau-embed div {
+            width: 100%;
+            height: 600px;
+            background: #f9f9f9; /* Light background for visibility */
+        }
+
+        /* Error Message Styling */
+        .error-message {
+            color: #ff4444;
+            text-align: center;
+            display: none;
+            margin: 1rem 0;
+        }
+
+        .error-message a {
+            color: #ff6f61;
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer Styling */
+        footer {
+            background: linear-gradient(90deg, #ff6f61, #ffb88c);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            nav a {
+                display: block;
+                margin: 0.5rem 0;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .tableau-embed div {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Yoga Studio Analytics Dashboard 🧘‍♀️✨</h1>
+        <p>Explore the power of data in enhancing your yoga journey 🌿</p>
+    </header>
+
+    <nav>
+        <a href="#overview">Overview</a>
+        <a href="#financial">Financial Data</a>
+        <a href="#attendance">Attendance Stats</a>
+        <a href="#distribution">Dist. Channels & Revenue</a>
+    </nav>
+
+    <div class="container">
+        <div class="section" id="overview">
+            <h2>Welcome to Our Yoga Analytics 🌸</h2>
+            <p>
+                Dive into the data-driven world of our yoga studio! These dashboards, powered by Tableau, provide insights into financial performance, class attendance, and distribution channels to help us create a more zen experience for everyone. 🧘‍♂️
+            </p>
+        </div>
+
+        <div class="section tableau-embed" id="financial">
+            <h3>Studio Financial Data 📊</h3>
+            <div id="tableau-viz-financial"></div>
+            <p class="error-message" id="error-financial">
+                Unable to load Financial Data dashboard. Please check your connection or 
+                <a href="https://public.tableau.com/views/YogaStudio/StudiosFinancialData" target="_blank">view it directly on Tableau Public</a>. 😔
+            </p>
+        </div>
+
+        <div class="section tableau-embed" id="attendance">
+            <h3>Classes Attendance Statistics 📈</h3>
+            <div id="tableau-viz-attendance"></div>
+            <p class="error-message" id="error-attendance">
+                Unable to load Attendance Statistics dashboard. Please check your connection or 
+                <a href="https://public.tableau.com/views/YogaStudio-ClassessAttendenceStatistics/ClassessAttendenceStatistics" target="_blank">view it directly on Tableau Public</a>. 😔
+            </p>
+        </div>
+
+        <div class="section tableau-embed" id="distribution">
+            <h3>Distribution Channels & Revenue 💰</h3>
+            <div id="tableau-viz-distribution"></div>
+            <p class="error-message" id="error-distribution">
+                Unable to load Distribution Channels dashboard. Please check your connection or 
+                <a href="https://public.tableau.com/views/YogaStudio-Dist_channelsRevenue/Dist_channelsRevenue" target="_blank">view it directly on Tableau Public</a>. 😔
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Yoga Studio Analytics | Powered by Passion & Data 🌿</p>
+    </footer>
+
+    <script>
+        // Function to show error messages for a specific dashboard
+        function showErrorMessage(id) {
+            const errorElement = document.getElementById(`error-${id}`);
+            if (errorElement) {
+                errorElement.style.display = 'block';
+            }
+            console.error(`Failed to load ${id} dashboard`);
+        }
+
+        // Function to load Tableau JavaScript API with retry
+        function loadTableauAPI(retryCount = 3, delay = 2000) {
+            const script = document.createElement('script');
+            script.src = 'https://public.tableau.com/javascripts/api/tableau-2.min.js';
+            script.async = true;
+            script.onload = () => {
+                console.log('Tableau API loaded successfully');
+                setTimeout(initializeTableau, 500); // Delay to ensure API is ready
+            };
+            script.onerror = () => {
+                if (retryCount > 0) {
+                    console.warn(`Retrying Tableau API load (${retryCount} attempts left)...`);
+                    setTimeout(() => loadTableauAPI(retryCount - 1, delay * 1.5), delay);
+                } else {
+                    ['financial', 'attendance', 'distribution'].forEach(showErrorMessage);
+                    console.error('Failed to load Tableau JavaScript API after retries. Check network or script URL.');
+                }
+            };
+            document.head.appendChild(script);
+        }
+
+        // Initialize Tableau dashboards
+        function initializeTableau() {
+            // Check if Tableau API is available
+            if (typeof tableau === 'undefined' || !tableau.Viz) {
+                ['financial', 'attendance', 'distribution'].forEach(showErrorMessage);
+                console.error('Tableau API not available. Ensure the script loaded correctly.');
+                return;
+            }
+
+            // Tableau Viz Options
+            const vizOptions = {
+                width: '100%',
+                height: '600px',
+                hideTabs: true,
+                hideToolbar: true,
+                onFirstInteractive: function(viz) {
+                    console.log(`Dashboard ${viz.getWorkbook().getName()} loaded successfully!`);
+                },
+                onFirstVizSizeKnown: function() {
+                    console.log('Dashboard size adjusted!');
+                }
+            };
+
+            // Financial Data Dashboard
+            try {
+                const financialDiv = document.getElementById('tableau-viz-financial');
+                const financialUrl = 'https://public.tableau.com/views/YogaStudio/StudiosFinancialData';
+                new tableau.Viz(financialDiv, financialUrl, vizOptions);
+                console.log('Financial Data dashboard initialized');
+            } catch (error) {
+                showErrorMessage('financial');
+                console.error('Error loading Financial Data dashboard:', error);
+            }
+
+            // Attendance Statistics Dashboard
+            try {
+                const attendanceDiv = document.getElementById('tableau-viz-attendance');
+                const attendanceUrl = 'https://public.tableau.com/views/YogaStudio-ClassessAttendenceStatistics/ClassessAttendenceStatistics';
+                new tableau.Viz(attendanceDiv, attendanceUrl, vizOptions);
+                console.log('Attendance Statistics dashboard initialized');
+            } catch (error) {
+                showErrorMessage('attendance');
+                console.error('Error loading Attendance Statistics dashboard:', error);
+            }
+
+            // Distribution Channels & Revenue Dashboard
+            try {
+                const distributionDiv = document.getElementById('tableau-viz-distribution');
+                const distributionUrl = 'https://public.tableau.com/views/YogaStudio-Dist_channelsRevenue/Dist_channelsRevenue';
+                new tableau.Viz(distributionDiv, distributionUrl, vizOptions);
+                console.log('Distribution Channels dashboard initialized');
+            } catch (error) {
+                showErrorMessage('distribution');
+                console.error('Error loading Distribution Channels dashboard:', error);
+            }
+        }
+
+        // Start loading Tableau API
+        loadTableauAPI();
+
+        // Smooth Scroll for Navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const sectionId = this.getAttribute('href').substring(1);
+                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Add animation to sections on scroll
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 1s ease-in-out';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
